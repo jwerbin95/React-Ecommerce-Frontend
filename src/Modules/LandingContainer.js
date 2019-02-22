@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NavBar from './Navigation'
 import auth0Client from './Authenticator';
 
 export default class LandingContainer extends Component{
@@ -42,27 +41,36 @@ export default class LandingContainer extends Component{
 	}
 	render() {
 		if(this.state.data!==null){
-			let returnedData = this.state.data.map(item=>{
+			let returnedData = this.state.data.map((item, i)=>{
 				return (
-							<li>
-							   <p>{item.name}</p>
-							   <p>{item.description}</p>
-							   <p>{item.price}</p>
-							   <p>{item.stock}</p>
-							   <button type="button" value={item.product_id} onClick={this.handleClick}>Add to Cart</button>
-						   </li>
-					   )
+						<div className="ui card" key={i}>
+							<img src={item.photo} className="ui image" alt={item.name}/>
+							<div className="content">
+							   	<div className="header">{item.name}</div>
+							   	<div className="description">{item.description}</div>
+							   	<div className="description">
+							   		<strong>${item.price}</strong>
+								</div>
+							</div>
+							<div className="meta">
+							   	<span className="date">Left In Stock: {item.stock}</span>
+							</div>
+							<div className="extra content">
+								<button className="ui button" type="button" value={item.product_id} onClick={this.handleClick}>Add to Cart</button>
+							</div>
+						</div>
+				)
 			})
 			return(
 			<div className="landingContainer">
-				<NavBar />
-				<h1>E-Commerce Website</h1>
-				<ul>{returnedData}</ul>
+				<div className="ui six cards">
+					{returnedData}
+				</div>
 			</div>
 			)
 		}else{
 			return(
-				<h1>Loading...</h1>
+				<div className="ui active centered inline loader"></div>
 			)
 		}
 	}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import 'semantic-ui-css/semantic.min.css'
 import LandingContainer from './Modules/LandingContainer'
 import CompanyList from './Modules/CompanyList'
 import NewProduct from './Modules/NewProduct'
@@ -7,10 +8,12 @@ import NewCompany from './Modules/NewCompany'
 import Callback from './Modules/Callback';
 import auth0Client from './Modules/Authenticator';
 import UserPage from './Modules/UserPage'
+import EditUser from './Modules/EditUser'
+import Header from './Modules/Header'
+import NavBar from './Modules/Navigation'
 import {
   BrowserRouter as Router,
-  Route,
-  Link, 
+  Route
 } from 'react-router-dom'
 
 class App extends Component {
@@ -27,12 +30,17 @@ class App extends Component {
     return (
       <Router>
       	<div>
-		   <Route exact path="/callback" component={Callback}/>
-		   <Route exact path="/" component={LandingContainer}/>
-		   <Route path="/companies" component={CompanyList}/>
-		   <Route path="/new_product" component={NewProduct}/>
-		   <Route path="/new_company" component={NewCompany}/>
-		   <Route path='/profile' component={UserPage} />
+	      	<Header />
+	      	<div className="container">
+	      		<NavBar />
+			   <Route exact path="/callback" component={Callback}/>
+			   <Route exact path="/" component={LandingContainer}/>
+			   <Route path="/companies" component={CompanyList}/>
+			   <Route path="/new_product" component={NewProduct}/>
+			   <Route path="/new_company" component={NewCompany}/>
+			   <Route path='/profile' component={UserPage} />
+			   <Route path='/edit_profile' component={EditUser} />
+		  	</div>
 	  	</div>
 	  </Router>
     );

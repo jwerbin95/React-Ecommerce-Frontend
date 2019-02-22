@@ -39,29 +39,45 @@ function NavBar(props) {
     <nav className="navbar navbar-dark bg-primary fixed-top">
       {
         !auth0Client.isAuthenticated() &&
-        <button className="btn btn-dark" onClick={auth0Client.signIn}>Sign In</button>
+        <div className="ui menu">
+          <button className="item" onClick={auth0Client.signIn}>Sign In</button>
+          <div className="right item">
+            <div className="ui action input">
+              <input type="text" placeholder="Search..."/>
+              <button type="submit" className="ui button">Go</button>
+            </div>
+          </div>
+        </div>
       }
       {
         auth0Client.isAuthenticated() &&
-        <div>
+        <div className="ui menu navigation">
           {addUserToDb()}
-          <label className="mr-2 text-white">{auth0Client.getProfile().name}</label>
+          <Link to="/">
+            <button className="item" type="button">Home</button>
+          </Link>
           <Link to="/profile">
-            <button className="btn btn-dark" type="button">Profile</button>
+            <button className="item" type="button">Profile</button>
+          </Link>
+          <Link to="/edit_profile">
+            <button className="item" type="button">Edit Profile</button>
           </Link>
           <Link to="/new_product">
-            <button className="btn btn-dark" type="button">Register A Product With Us</button>
+            <button className="item" type="button">Register A Product With Us</button>
           </Link>
           <Link to="/new_company">
-            <button className="btn btn-dark" type="button">Register Your Company With Us</button>
-          </Link>
-          <Link to="/">
-            <button className="btn btn-dark" type="button">Home</button>
+            <button className="item" type="button">Register Your Company With Us</button>
           </Link>
           <Link to="/companies">
-            <button className="btn btn-dark" type="button">Company List</button>
+            <button className="item" type="button">Company List</button>
           </Link>
-          <button className="btn btn-dark" onClick={() => {signOut()}}>Sign Out</button>
+          <div className="right item">
+            <div className="ui action input">
+              <input type="text" placeholder="Search..."/>
+              <button type="submit" className="ui button">Go</button>
+            </div>
+          </div>
+          <button className="item" onClick={() => {signOut()}}>Sign Out</button>
         </div>
       }
     </nav>

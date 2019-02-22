@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import auth0Client from './Authenticator';
-import NavBar from './Navigation'
+import { Button, Popup } from 'semantic-ui-react'
 
 export default class NewProduct extends Component{
 	state={
@@ -8,7 +8,8 @@ export default class NewProduct extends Component{
 		name: "",
 		description: "",
 		price: null,
-		stock: null
+		stock: null,
+		photo: ""
 
 	}
 
@@ -30,8 +31,9 @@ export default class NewProduct extends Component{
 				company_fk: parseInt([this.state.company_fk].toString()),
 				name: [this.state.name].toString(),
 				description: [this.state.description].toString(),
-				price: parseFloat([this.price].toString()),
-				stock: parseInt([this.state.stock].toString())
+				price: parseFloat([this.state.price].toString()),
+				stock: parseInt([this.state.stock].toString()),
+				photo: [this.state.photo].toString()
 			})
 
 		})
@@ -49,29 +51,57 @@ export default class NewProduct extends Component{
 		}else{
 			return(
 				<div>
-					<NavBar />
-					<form>
-						<label>
-					    	Company:
-					    	<input type="number" name="company_fk" onChange={this.handleChange}/>
-					  	</label>
-					  	<label>
-					    	Name:
-					    	<input type="text" name="name" onChange={this.handleChange}/>
-					  	</label>
-					  	<label>
-					    	Description:
-					    	<input type="text" name="description" onChange={this.handleChange}/>
-					  	</label>
-					  	<label>
-					    	Price:
-					    	<input type="number" name="price" onChange={this.handleChange}/>
-					  	</label>
-					  	<label>
-					    	Stock:
-					    	<input type="number" name="stock" onChange={this.handleChange}/>
-					  	</label>
-					  	<input type="submit" value="Submit" onClick={this.handleClick}/>
+					<form className="ui form">
+						<div className="equal width fields">
+							<div className="field">
+								<label>Company Id</label>
+								<div className="ui fluid input">
+									<input type="text" placeholder="Company Id" name="company_fk" onChange={this.handleChange}/>
+								</div>
+							</div>
+							<div className="field">
+								<label>Product Name</label>
+								<div className="ui fluid input">
+									<input type="text" placeholder="Product Name" name="name" onChange={this.handleChange}/>
+								</div>
+							</div>
+							<div className="field">
+								<label>Price</label>
+								<div className="ui fluid input">
+									<input type="number" placeholder="Price" name="price" onChange={this.handleChange}/>
+								</div>
+							</div>
+							<div className="field">
+								<label>Stock</label>
+								<div className="ui fluid input">
+									<input type="number" placeholder="Stock" name="stock" onChange={this.handleChange}/>
+								</div>
+							</div>
+							<div className="field">
+								<label>Add a Photo</label>
+								<div className="ui fluid input">
+									<input type="file" placeholder="Photo" name="photo" onChange={this.handleChange}/>
+								</div>
+							</div>
+						</div>
+						<div className="field">
+							<label>Description</label>
+							<textarea placeholder="Describe your product..." rows="3" name="description" onChange={this.handleChange}></textarea>
+						</div>
+						<div className="field">
+							<div className="ui checkbox">
+								<input type="checkbox" className="hidden" readOnly="" tabIndex="0"/>
+								<label>I agree to the Terms and Conditions</label>
+							</div>
+						</div>
+						<div className="field">
+							<Popup
+    							trigger={<Button content='Submit' onClick={this.handleClick}/>}
+    							content={<p>Sucessfully Added Product To Catalog!</p>}
+   							 	on='click'
+    							position='top right'
+  							/>
+						</div>
 					</form>
 				</div>
 			)

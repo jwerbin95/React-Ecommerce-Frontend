@@ -3,12 +3,12 @@ import auth0Client from './Authenticator';
 
 export default class Cart extends Component{
 	state={
-		cartData: null
+		cartData: null,
+		total: 0
 	}
 	handleClick = (event) =>{
 		event.preventDefault()
 		let newValue = event.currentTarget.value
-		console.log(newValue)
 		fetch(`http://localhost:3000/remove_from_cart`, {
 			method: 'DELETE',
 			mode: 'cors',
@@ -43,20 +43,30 @@ export default class Cart extends Component{
 		if(this.state.cartData===null){
 			this.getCartData()
 			return(
-				<h1>Loading Cart...</h1>
+				<div className="ui active centered inline loader"></div>
 			)
 		}else{
-			let cart = this.state.cartData.map(item=>{
+			let total = 0
+			let cart = this.state.cartData.map((item, i)=>{
+				total+=parseFloat(item.price)
 				return (
-						<li>
-							<p>{item.name}</p>
-							<p>{item.price}</p>
-							<button type="button" value={item.product_id} onClick={this.handleClick}>Remove From Cart</button>
-						</li>
-					)
+					<div className="ui card" key={i}>
+						<div className="content">
+							<div className="header">{item.name}</div>
+							<div className="description">{item.description}</div>
+							<div className="meta">${item.price}</div>
+						</div>
+						<div className="extra content">
+							<button className="ui button" type="button" value={item.product_id} onClick={this.handleClick}>Remove From Cart</button>
+						</div>
+					</div>
+				)
 			})
 			return(
-				<ul>{cart}</ul>
+				<div>
+					<div className="ui cards">{cart}</div>
+					<h3>Total: ${total}</h3>
+				</div>
 			)
 		}
 	}

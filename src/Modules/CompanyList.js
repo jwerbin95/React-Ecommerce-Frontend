@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NavBar from './Navigation'
 
 export default class CompanyList extends Component{
 	state={
@@ -21,23 +20,24 @@ export default class CompanyList extends Component{
 	}
 	render(){
 		if(this.state.data!==null){
-			let returnedData=this.state.data.map(item=>{
+			let returnedData=this.state.data.map((item, i)=>{
 				return (
-					<li>
-						<p>{item.name}</p>
-						<p>{item.description}</p>
-					</li>
+					<div className="ui card" key={i}>
+						<div className="content">
+							<div className="header">{item.name}</div>
+							<div className="description">{item.description}</div>
+						</div>
+					</div>
 				)
 			})
 			return(
 				<div>
-					<NavBar />
-					<ul>{returnedData}</ul>
+					<div className="ui cards">{returnedData}</div>
 				</div>
 			)
 		}else{
 			return(
-				<h1>Loading...</h1>
+				<div className="ui active centered inline loader"></div>
 			)
 		}
 	}

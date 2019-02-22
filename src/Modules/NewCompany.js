@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from './Navigation'
+import { Button, Popup } from 'semantic-ui-react'
 
 export default class NewCompany extends Component{
 	state={
@@ -36,18 +36,34 @@ export default class NewCompany extends Component{
 	render(){
 		return(
 			<div>
-				<NavBar />
-				<form>
-					<label>
-				    	Name:
-				    	<input type="text" name="name" onChange={this.handleChange}/>
-				  	</label>
-				  	<label>
-				    	Description:
-				    	<input type="text" name="description" onChange={this.handleChange}/>
-				  	</label>
-				  	<input type="submit" value="Submit" onClick={this.handleClick}/>
-			  	</form>
+				<form className="ui form">
+						<div className="equal width fields">
+							<div className="field">
+								<label>Company Name</label>
+								<div className="ui fluid input">
+									<input type="text" placeholder="Company Name" name="name" onChange={this.handleChange}/>
+								</div>
+							</div>
+						</div>
+						<div className="field">
+							<label>Description</label>
+							<textarea placeholder="Describe your company..." rows="3" name="description" onChange={this.handleChange}></textarea>
+						</div>
+						<div className="field">
+							<div className="ui checkbox">
+								<input type="checkbox" className="hidden" readOnly="" tabIndex="0"/>
+								<label>I agree to the Terms and Conditions</label>
+							</div>
+						</div>
+						<div className="field">
+							<Popup
+    							trigger={<Button content='Submit' onClick={this.handleClick}/>}
+    							content={<p>Sucessfully Added Company!</p>}
+   							 	on='click'
+    							position='top right'
+  							/>
+						</div>
+					</form>
 		  	</div>
 		)
 	}

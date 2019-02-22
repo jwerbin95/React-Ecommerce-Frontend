@@ -10,7 +10,7 @@ class Callback extends Component {
 
   render() {
     return (
-      <p>Loading profile...</p>
+      <div className="ui active centered inline loader"></div>
     );
   }
 }

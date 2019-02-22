@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import auth0Client from './Authenticator';
 import Cart from './Cart'
-import NavBar from './Navigation'
 
 export default class UserPage extends Component{
 	state={
@@ -20,33 +19,45 @@ export default class UserPage extends Component{
 				console.log(error.stack)
 			})
 	}
+	componentDidMount(){
+		auth0Client.isAuthenticated() &&
+		this.getUserData()
+	}
 	render(){
 		if(!auth0Client.isAuthenticated()){
 			return(
 				<div>
 					<h1>You neded to sign in to access your profile.</h1>
-					<button type="button" onClick={auth0Client.signIn}>Sign In</button>
 				</div>
 			)
 		}
 		if(this.state.userData!==null)
 		{
-			let newData = this.state.userData.map(item=>{
+			let newData = this.state.userData.map((item, i)=>{
 				return (
-					<div>
-						<NavBar />
-						<img src={item.picture} alt={item.user_name}/>
-						<p>{item.user_name}</p>
-						<p>{item.email}</p>
+					<div key={i}>
+						<h3>{auth0Client.getProfile().name}</h3>
+						<img className="ui large image" src={item.picture} alt={item.user_name}/>
+						<p>User Name: {item.user_name}</p>
+						<p>Email: {item.email}</p>
 					</div>
 				)
 			})
 			return(
 				auth0Client.isAuthenticated() &&
-				<div>
-					{this.getUserData()}
-					{newData}
-					<Cart />
+				<div className="ui vertically divided grid userPage">
+					<div className="two column row">
+						<div className="column">
+							{newData}
+						</div>
+						<div className="column">
+							<h3>
+								<i aria-hidden="true" class="shopping cart icon"></i>
+								Shopping Cart
+							</h3>
+							<Cart />
+						</div>
+					</div>
 				</div>
 			)
 		}else{
@@ -54,7 +65,7 @@ export default class UserPage extends Component{
 				auth0Client.isAuthenticated() &&
 				<div>
 					{this.getUserData()}
-					<h1>Loading...</h1>
+					<div className="ui active centered inline loader"></div>
 				</div>
 			)
 		}
