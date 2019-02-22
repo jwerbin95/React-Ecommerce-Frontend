@@ -1,6 +1,6 @@
 {
-  "short_name": "Etsy E-Commerce",
-  "name": "Etsy E-Commerce Frontend",
+  "short_name": "E-Commerce",
+  "name": "E-Commerce Frontend",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
