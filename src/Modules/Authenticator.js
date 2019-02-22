@@ -3,7 +3,6 @@ import auth0 from 'auth0-js';
 class Authenticator {
   constructor() {
     this.auth0 = new auth0.WebAuth({
-      // the following three lines MUST be updated
       domain: 'jw95.auth0.com',
       audience: 'https://jw95.auth0.com/userinfo',
       clientID: 'vj4D4dlgRoeOiSbTii3BEmFdIQCX0clO',

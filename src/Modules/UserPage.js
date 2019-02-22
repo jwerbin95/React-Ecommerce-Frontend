@@ -52,7 +52,7 @@ export default class UserPage extends Component{
 						</div>
 						<div className="column">
 							<h3>
-								<i aria-hidden="true" class="shopping cart icon"></i>
+								<i aria-hidden="true" className="shopping cart icon"></i>
 								Shopping Cart
 							</h3>
 							<Cart />

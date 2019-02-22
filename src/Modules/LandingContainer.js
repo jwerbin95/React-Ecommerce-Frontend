@@ -44,9 +44,11 @@ export default class LandingContainer extends Component{
 			let returnedData = this.state.data.map((item, i)=>{
 				return (
 						<div className="ui card" key={i}>
-							<img src={item.photo} className="ui image" alt={item.name}/>
+							<img src={item.photo} className="ui image product" alt={item.name}/>
 							<div className="content">
 							   	<div className="header">{item.name}</div>
+							   	<div class="ui section divider"></div>
+							   	<div className="header">{item.cname}</div>
 							   	<div className="description">{item.description}</div>
 							   	<div className="description">
 							   		<strong>${item.price}</strong>
