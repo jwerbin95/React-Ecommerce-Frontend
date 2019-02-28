@@ -14,6 +14,7 @@ export default class EditUser extends Component{
 		})
 	}
 	handleClick = (event)=>{
+		console.log(this.state.user_name)
 		event.preventDefault()
 		fetch(`http://localhost:3000/edit_user/${auth0Client.getProfile().aud}`, {
 			method: 'PUT',
@@ -28,7 +29,7 @@ export default class EditUser extends Component{
 
 		})
 			.then(data=>{
-				console.log("Sent "+this.state+" as post request.")
+				console.log("Sent "+this.state+" as put request.")
 			})
 			.catch(error=>{
 				console.log(error.stack)
